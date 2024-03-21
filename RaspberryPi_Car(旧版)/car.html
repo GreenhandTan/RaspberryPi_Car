@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+		<title>小车</title>
+	</head>
+
+	<body>
+		<!--keyCode 键盘码 在键盘事件发生的时候 记录对应按的哪个键-->
+		<script type="text/javascript">
+			function go(k) {
+				$.post('/', {
+					k: k
+				}, function() {});
+			}
+			$(function() {
+				window.document.onkeydown = abc;
+
+				function abc(ev) {
+					ev = (ev) ? ev : window.event;
+					// 指定方向键 ，w(上-->87),a(左-->83),s(下-->65),d(右-->67)
+					if (ev.keyCode == '87') {
+						go('w');
+					}
+					if (ev.keyCode == '65') {
+						go('a');
+					}
+					if (ev.keyCode == '68') {
+						go('d');
+					}
+					if (ev.keyCode == '81') {
+						go('q');
+					}
+					if (ev.keyCode == '69') {
+						go('e');
+					}
+					if (ev.keyCode == '90') {
+						go('z');
+					}
+					if (ev.keyCode == '83') {
+						go('s');
+					}
+				}
+
+				var i = null;
+				$('.front').mousedown(function() {
+					i = setInterval(function() {
+						go('w');
+					}, 40);
+				});
+				$('.leftRear').mousedown(function() {
+					i = setInterval(function() {
+						go('a');
+					}, 40);
+				});
+				$('.rear').mousedown(function() {
+					i = setInterval(function() {
+						go('s');
+					}, 40);
+				});
+				$('.rightRear').mousedown(function() {
+					i = setInterval(function() {
+						go('d');
+					}, 40);
+				});
+				$('.leftFront').mousedown(function() {
+					i = setInterval(function() {
+						go('q');
+					}, 40);
+				});
+				$('.rightFront').mousedown(function() {
+					i = setInterval(function() {
+						go('e');
+					}, 40);
+				});
+				$('#main span').mouseup(function() {
+					clearInterval(i);
+				});
+			});
+		</script>
+
+
+		<style type="text/css">
+			#main {
+				width: 150px;
+				height: 150px;
+				background: #ffffff;
+			}
+
+			#main span {
+				width: 50px;
+				height: 50px;
+				float: left;
+			}
+
+			#main span.on2 {
+				background: lightcoral;
+			}
+		</style>
+		<div style="border: 1px solid green;text-align:center;">
+			<img src="http://192.168.0.16:8080/?action=stream" />
+		</div>
+		<div id="main">
+			<span></span>
+			<span class="on2 before"></span>
+			<span></span>
+			<span class="on2 left"></span>
+			<span></span>
+			<span class="on2 right"></span>
+			<span></span>
+			<span class="on2 cabk"></span>
+			<span></span>
+		</div>
+	</body>
+</html>
